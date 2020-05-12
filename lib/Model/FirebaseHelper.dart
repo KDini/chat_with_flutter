@@ -23,6 +23,11 @@ class FirebaseHelper {
 
   }
 
+  Future<String> myId() async {
+    FirebaseUser user = await auth.currentUser();
+    return user.uid;
+  }
+
   //Database
 
   static final base = FirebaseDatabase.instance.reference();
