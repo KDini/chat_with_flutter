@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:chatwithflutter/Model/User.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
 
 class FirebaseHelper {
   //Authentification
@@ -23,6 +26,11 @@ class FirebaseHelper {
 
   }
 
+  Future<bool> handleLogOut() async {
+    await auth.signOut();
+    return true;
+  }
+
   Future<String> myId() async {
     FirebaseUser user = await auth.currentUser();
     return user.uid;
@@ -35,6 +43,22 @@ class FirebaseHelper {
 
   addUser(String id, Map map) {
     base_user.child(id).set(map);
+  }
+
+  Future<User> getUser(String id) async {
+    DataSnapshot snapshot = await base_user.child(id).once();
+    return new User(snapshot);
+  }
+
+  //Storage
+  static final base_storage = FirebaseStorage.instance.ref();
+  final StorageReference storage_users = base_storage.child("users");
+
+  Future<String> savePicture(File file, StorageReference storageReference) async {
+    StorageUploadTask storageUploadTask = storageReference.putFile(file);
+    StorageTaskSnapshot snapshot = await storageUploadTask.onComplete;
+    String url = await snapshot.ref.getDownloadURL();
+    return url;
   }
 
 }
