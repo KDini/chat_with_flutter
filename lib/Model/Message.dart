@@ -1,4 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:chatwithflutter/Model/DateHelper.dart';
 
 class Message {
   String from;
@@ -13,6 +14,8 @@ class Message {
     to = value["to"];
     text = value["text"];
     imageUrl = value["imageUrl"];
-    dateString = value["dateString"];
+    String date = value["dateString"];
+    dateString = DateHelper().getDate(date);
+
   }
 }

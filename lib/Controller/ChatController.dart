@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:chatwithflutter/Model/User.dart';
 import 'package:chatwithflutter/Widgets/CustomImage.dart';
 import 'package:chatwithflutter/Widgets/ZoneDeTexteWidget.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:chatwithflutter/Model/FirebaseHelper.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:chatwithflutter/Model/Message.dart';
+import 'package:chatwithflutter/Widgets/ChatBubble.dart';
 
 class ChatController extends StatefulWidget {
 
@@ -27,7 +32,7 @@ class ChatControllerState extends State<ChatController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           new CustomImage(widget.partenaire.imageUrl, widget.partenaire.initiales, 15.0),
-          new Text(widget.partenaire.prenom)
+          new Text(" " + widget.partenaire.prenom)
         ],
       ),
       ),
@@ -37,7 +42,16 @@ class ChatControllerState extends State<ChatController> {
           child: new Column(
             children: <Widget>[
               //Zone de chat
-              new Flexible(child: new Container()),
+              new Flexible(child: new FirebaseAnimatedList(
+                query: FirebaseHelper().base_message.child(FirebaseHelper().getMessageRef(widget.id, widget.partenaire.id)),
+                reverse: true,
+                sort: (a,b) => b.key.compareTo(a.key),
+                itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
+                  Message message = new Message(snapshot);
+                  print(message.text);
+                  return new ChatBubble(widget.id, widget.partenaire, message, animation);
+                },
+              )),
               //Divider
               new Divider(height: 1.5,),
               //Zone de texte

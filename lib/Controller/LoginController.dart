@@ -40,7 +40,7 @@ class LoginControllerState extends State<LoginController> {
             ),
             new RaisedButton(
                 onPressed: _handleLog,
-              color: Colors.blue,
+              color: Colors.amber,
               child: new Text((_log == true)?"Se connecter":"S'inscrire",
                 style: new TextStyle(
                     color: Colors.white,

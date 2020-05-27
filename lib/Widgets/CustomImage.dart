@@ -19,7 +19,7 @@ class CustomImage extends StatelessWidget {
     if (imageUrl == null) {
       return new CircleAvatar(
         radius: radius ?? 0.0,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.amber,
         child: new Text(initiales ?? "", style: new TextStyle(color: Colors.white, fontSize: radius)),
       );
     } else {
@@ -59,7 +59,7 @@ class CustomImage extends StatelessWidget {
               children: <Widget>[
                 new Image(image: provider),
                 new RaisedButton(
-                  color: Colors.blue,
+                  color: Colors.amber,
                     onPressed: () => Navigator.of(build).pop(),
                     child: new Text("Ok", style: new TextStyle(color: Colors.white, fontSize: 20.0),))
               ],

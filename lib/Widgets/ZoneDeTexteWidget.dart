@@ -40,8 +40,8 @@ class ZoneState extends State<ZoneDeTexteWidget> {
       padding: EdgeInsets.all(5.0),
       child: new Row(
         children: <Widget>[
-          new IconButton(icon: new Icon(Icons.camera_enhance), onPressed: null),
-          new IconButton(icon: new Icon(Icons.photo_library), onPressed: null),
+          new IconButton(icon: new Icon(Icons.camera_enhance), onPressed: () => takePicture(ImageSource.camera)),
+          new IconButton(icon: new Icon(Icons.photo_library), onPressed: () => takePicture(ImageSource.gallery)),
           new Flexible(
               child: new TextField(
                 controller: _textEditingController,
@@ -59,10 +59,19 @@ class ZoneState extends State<ZoneDeTexteWidget> {
     if (_textEditingController.text != null && _textEditingController.text != ""){
       String text = _textEditingController.text;
       FirebaseHelper().sendMessage(widget.partenaire, moi, text, null);
+      _textEditingController.clear();
       FocusScope.of(context).requestFocus(new FocusNode());
     } else {
       print("Texte vide ou null");
     }
+  }
+  
+  Future<void> takePicture(ImageSource source) async {
+    File file = await ImagePicker.pickImage(source: source, maxWidth: 1000.0, maxHeight: 1000.0);
+    String date = new DateTime.now().millisecondsSinceEpoch.toString();
+    FirebaseHelper().savePicture(file, FirebaseHelper().storage_messages.child(widget.id).child(date)).then((string) {
+      FirebaseHelper().sendMessage(widget.partenaire, moi, null, string);
+    });
   }
   
 }

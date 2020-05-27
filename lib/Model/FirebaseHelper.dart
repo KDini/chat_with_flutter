@@ -90,6 +90,7 @@ class FirebaseHelper {
   //Storage
   static final base_storage = FirebaseStorage.instance.ref();
   final StorageReference storage_users = base_storage.child("users");
+  final StorageReference storage_messages = base_storage.child("messages");
 
   Future<String> savePicture(File file, StorageReference storageReference) async {
     StorageUploadTask storageUploadTask = storageReference.putFile(file);

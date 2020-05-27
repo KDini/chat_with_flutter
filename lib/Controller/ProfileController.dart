@@ -74,8 +74,9 @@ class ProfileControllerState extends State<ProfileController> {
                 });
               },
             ),
+            SizedBox(height: 20),
             new RaisedButton(
-              color: Colors.blue,
+              color: Colors.amber,
                 onPressed: _saveChanges,
               child: new Text("Sauvegarder les changements", style: new TextStyle(color: Colors.white, fontSize: 20.0),),
             ),
@@ -83,7 +84,7 @@ class ProfileControllerState extends State<ProfileController> {
                 onPressed: () {
                   _logOut(context);
                 },
-                child: new Text("Se déconnecter", style: new TextStyle(color: Colors.blue, fontSize: 20.0),)
+                child: new Text("Se déconnecter", style: new TextStyle(color: Colors.amber, fontSize: 20.0),)
             )
 
           ],

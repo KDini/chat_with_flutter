@@ -5,7 +5,6 @@ import 'package:chatwithflutter/Model/FirebaseHelper.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:chatwithflutter/Model/User.dart';
 import 'package:chatwithflutter/Widgets/CustomImage.dart';
-import 'package:chatwithflutter/Controller/ChatController.dart';
 
 class ContactController extends StatefulWidget {
   String id;

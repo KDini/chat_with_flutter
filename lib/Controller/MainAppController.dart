@@ -34,7 +34,7 @@ class MainAppControllerState extends State<MainAppController> {
             if(Theme.of(context).platform == TargetPlatform.iOS) {
               return new CupertinoTabScaffold(
                   tabBar: new CupertinoTabBar(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.amber,
                       activeColor: Colors.black,
                       inactiveColor: Colors.white,
                       items: [
@@ -79,7 +79,7 @@ class MainAppControllerState extends State<MainAppController> {
                   style: new TextStyle(
                     fontSize: 25.0,
                     fontStyle: FontStyle.italic,
-                    color: Colors.blue
+                    color: Colors.amber
                   ),
                 ),
               ),
