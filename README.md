@@ -2,6 +2,9 @@
 
 Chat application with Flutter and Firebase
 
+Exemple
+![](asset/chat.png)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
