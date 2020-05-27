@@ -47,7 +47,26 @@ class CustomImage extends StatelessWidget {
   }
 
   Future<void> _showImage(BuildContext context, ImageProvider provider) {
-
+    return showDialog(
+        context: context,
+      barrierDismissible: true,
+      builder: (BuildContext build) {
+          return new Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                new Image(image: provider),
+                new RaisedButton(
+                  color: Colors.blue,
+                    onPressed: () => Navigator.of(build).pop(),
+                    child: new Text("Ok", style: new TextStyle(color: Colors.white, fontSize: 20.0),))
+              ],
+            ),
+          );
+      }
+    );
 
   }
 
