@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:chatwithflutter/Model/User.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
+import 'package:chatwithflutter/Model/User.dart';
 
 class FirebaseHelper {
   //Authentification
@@ -40,6 +41,8 @@ class FirebaseHelper {
 
   static final base = FirebaseDatabase.instance.reference();
   final base_user = base.child("users");
+  final base_message = base.child("messages");
+  final base_conversation = base.child("conversations");
 
   addUser(String id, Map map) {
     base_user.child(id).set(map);
@@ -48,6 +51,40 @@ class FirebaseHelper {
   Future<User> getUser(String id) async {
     DataSnapshot snapshot = await base_user.child(id).once();
     return new User(snapshot);
+  }
+  
+  //Message
+  sendMessage(User user,User moi ,String text, String imageUrl){
+    String date = new DateTime.now().millisecondsSinceEpoch.toString();
+    Map map = {
+      "from": moi.id,
+      "to": user.id,
+      "text": text,
+      "imageUrl": imageUrl,
+      "dateString": date
+    };
+    base_message.child(getMessageRef(moi.id, user.id)).child(date).set(map);
+    base_conversation.child(moi.id).child(user.id).set(getConversation(moi.id, user, text, date));
+    base_conversation.child(user.id).child(moi.id).set(getConversation(moi.id, moi, text, date));
+  }
+
+  Map getConversation(String sender, User user, String text, String dateString) {
+    Map map = user.toMap();
+    map["monId"] = sender;
+    map["last_message"] = text;
+    map["dateString"] = dateString;
+    return map;
+  }
+
+
+  String getMessageRef(String from, String to) {
+    String resultat = "";
+    List<String> liste = [from, to];
+    liste.sort((a, b) => a.compareTo(b));
+    for (var x in liste) {
+      resultat += x + "+";
+    }
+    return resultat;
   }
 
   //Storage

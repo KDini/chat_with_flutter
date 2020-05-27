@@ -8,9 +8,9 @@ class User {
   String initiales;
 
   User(DataSnapshot snapshot) {
-    id = snapshot.key;
     Map map = snapshot.value;
     prenom = map["prenom"];
+    id = map["uid"];
     nom = map["nom"];
     imageUrl = map["imageUrl"];
     if (prenom != null && prenom.length > 0) {
