@@ -6,6 +6,8 @@ Chat application with Flutter and Firebase
 
 ![](asset/chat.png)
 
+![](asset/profile.png)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
