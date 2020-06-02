@@ -33,6 +33,9 @@
 # Android related
 **/android/**/gradle-wrapper.jar
 **/android/.gradle
+**/android/app/src/build.gradle
+**/android/app/src/main/AndroidManifest.xml
+**/android/app/src/google-services.json
 **/android/captures/
 **/android/gradlew
 **/android/gradlew.bat
@@ -55,6 +58,8 @@
 **/ios/**/.symlinks/
 **/ios/**/profile
 **/ios/**/xcuserdata
+**/ios/Runner/GoogleService-Info.plist
+**/ios/Runner.xcodeproj/project.pbxproj
 **/ios/.generated/
 **/ios/Flutter/App.framework
 **/ios/Flutter/Flutter.framework
